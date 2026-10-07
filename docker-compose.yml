@@ -1,0 +1,77 @@
+# =====================================================================
+# Produção: banco PostgreSQL + aplicação + HTTPS automático (Caddy) + backup diário
+# Uso:  cp .env.example .env  (preencha)  &&  docker compose up -d --build
+# =====================================================================
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: clinica
+      POSTGRES_USER: clinica
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clinica -d clinica"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    # o banco não é exposto para a internet
+
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://clinica:${POSTGRES_PASSWORD}@db:5432/clinica
+      TRUST_PROXY: "1"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - uploads:/app/uploads
+    expose:
+      - "3000"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?defina DOMAIN no .env (ex.: agendamento.jrsaude.com.br)}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+  backup:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      PGHOST: db
+      PGUSER: clinica
+      PGDATABASE: clinica
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      BACKUP_DIR: /backups
+      KEEP_DAILY: ${BACKUP_KEEP_DAILY:-14}
+      KEEP_WEEKLY: ${BACKUP_KEEP_WEEKLY:-8}
+      KEEP_MONTHLY: ${BACKUP_KEEP_MONTHLY:-12}
+    volumes:
+      - ./backups:/backups
+      - ./scripts:/scripts:ro
+    # backup todos os dias às 03:15 (horário do servidor) + um na inicialização
+    entrypoint: ["/bin/sh", "-c", "/scripts/backup.sh; echo '15 3 * * * /scripts/backup.sh >> /backups/backup.log 2>&1' | crontab - && crond -f -l 8"]
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  uploads:
+  caddy_data:
+  caddy_config:

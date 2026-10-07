@@ -14,7 +14,10 @@
     "migrate": "npm run migrate --workspace server",
     "seed": "npm run seed --workspace server",
     "test": "npm run test --workspace server",
-    "typecheck": "npm run typecheck --workspace server && npm run typecheck --workspace web"
+    "typecheck": "npm run typecheck --workspace server && npm run typecheck --workspace web",
+    "test:e2e": "playwright test",
+    "seed:demo": "npm run seed:demo --workspace server",
+    "create-admin": "npm run create-admin --workspace server --"
   },
   "engines": {
     "node": ">=20"

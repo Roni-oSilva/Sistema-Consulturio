@@ -5,6 +5,9 @@
 import pg from 'pg';
 
 const url = process.env.DATABASE_URL!;
+// proteção: nunca apagar um banco que não seja claramente de teste
+const dbName = new URL(url).pathname.slice(1);
+if (!/test|e2e/i.test(dbName)) throw new Error(`Recusado: o banco "${dbName}" não parece ser de teste.`);
 const client = new pg.Client({ connectionString: url });
 await client.connect();
 await client.query('DROP SCHEMA IF EXISTS public CASCADE');
