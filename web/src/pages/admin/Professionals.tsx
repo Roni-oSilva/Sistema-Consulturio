@@ -283,7 +283,7 @@ function ProfessionalEditor({ pro, onClose }: { pro: AdminProfessional | null; o
                     height: 30,
                     borderRadius: 8,
                     background: c,
-                    border: f.color.toLowerCase() === c.toLowerCase() ? '3px solid var(--gold-500)' : '2px solid #fff',
+                    border: f.color.toLowerCase() === c.toLowerCase() ? '3px solid var(--lime-500)' : '2px solid #fff',
                     boxShadow: '0 0 0 1px var(--line-strong)',
                     cursor: 'pointer',
                   }}

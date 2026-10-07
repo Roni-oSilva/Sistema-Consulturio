@@ -10,12 +10,12 @@ async function expectNoHorizontalScroll(page: Page) {
 
 test('12. Paciente agenda pelo celular, do início ao fim', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'JR SAÚDE' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Saúde com/ })).toBeVisible();
   await expect(page.getByText('Cardiologia').first()).toBeVisible();
   await expectNoHorizontalScroll(page);
   await page.screenshot({ path: `${SHOTS}/m01-home.png`, fullPage: true });
 
-  await page.getByRole('link', { name: 'AGENDAR CONSULTA' }).click();
+  await page.getByRole('link', { name: 'Agendar consulta' }).click();
   await expect(page.getByRole('heading', { name: 'Qual atendimento você precisa?' })).toBeVisible();
   await expectNoHorizontalScroll(page);
   await page.screenshot({ path: `${SHOTS}/m02-servicos.png` });

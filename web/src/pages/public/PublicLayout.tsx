@@ -1,18 +1,19 @@
 import { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Icon } from '../../components/Icon';
-import { ClinicLogo, Wordmark } from '../../components/Logo';
+import { ClinicLogo } from '../../components/Logo';
 import { ErrorState, Loading } from '../../components/ui';
 import { api } from '../../lib/api';
 import { ClinicContext, useAsync, type Clinic } from '../../lib/hooks';
 
 export function PublicLayout() {
   const { data: clinic, error, reload } = useAsync((signal) => api.get<Clinic>('/api/public/clinic', { signal }), []);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
+  const shortName = clinic?.shortName || 'JR Saúde';
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (!hash) window.scrollTo(0, 0);
+  }, [pathname, hash]);
 
   return (
     <div className="public">
@@ -21,18 +22,35 @@ export function PublicLayout() {
       </a>
       <header className="topbar">
         <div className="wrap">
-          <Link to="/" className="brand" aria-label="Página inicial">
-            <ClinicLogo logoUrl={clinic?.logoUrl} name={clinic?.shortName || 'JR Saúde'} size={30} color="var(--cream-0)" accent="var(--gold-400)" />
-            <Wordmark small name={(clinic?.shortName || 'JR Saúde').toUpperCase()} />
-          </Link>
-          <nav aria-label="Principal">
-            <Link to="/meus-agendamentos" className="topbar-link">
-              <Icon name="calendar" size={18} />
-              <span>Meus agendamentos</span>
+          <div className="topbar-inner">
+            <Link to="/" className="brand" aria-label={`${shortName} — página inicial`}>
+              <ClinicLogo logoUrl={clinic?.logoUrl} name={shortName} size={30} color="var(--blue-800)" accent="var(--blue-500)" />
+              <span className="wordmark wordmark-sm" translate="no">
+                {shortName}
+              </span>
             </Link>
-          </nav>
+            <nav className="topnav" aria-label="Seções">
+              <a href="/#especialidades">Especialidades</a>
+              <a href="/#sobre">A clínica</a>
+              <a href="/#profissionais">Profissionais</a>
+              <a href="/#contato">Contato</a>
+            </nav>
+            <div className="topbar-actions">
+              <Link to="/meus-agendamentos" className="topbar-link" aria-label="Meus agendamentos">
+                <Icon name="calendar" size={18} />
+                <span>Meus agendamentos</span>
+              </Link>
+              {pathname !== '/agendar' && (
+                <Link to="/agendar" className="btn btn-cta" aria-label="Agendar">
+                  <span className="label">Agendar</span>
+                  <span className="orb">
+                    <Icon name="arrowUpRight" size={18} />
+                  </span>
+                </Link>
+              )}
+            </div>
+          </div>
         </div>
-        <hr className="led" />
       </header>
 
       <main id="conteudo" tabIndex={-1}>
@@ -50,9 +68,12 @@ export function PublicLayout() {
       </main>
 
       <footer className="footer">
+        <div className="bgword" aria-hidden="true" translate="no">
+          {shortName.toUpperCase()}
+        </div>
         <div className="wrap">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, color: 'var(--cream-0)' }}>
-            <ClinicLogo logoUrl={clinic?.logoUrl} name={clinic?.name ?? 'JR Saúde'} size={26} color="var(--cream-0)" accent="var(--gold-400)" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, color: 'var(--white)' }}>
+            <ClinicLogo logoUrl={clinic?.logoUrl} name={clinic?.name ?? shortName} size={28} color="var(--white)" accent="var(--lime-400)" />
             <span className="wordmark wordmark-sm">{clinic?.name ?? 'Centro Clínico JR Saúde'}</span>
           </div>
           {clinic?.address && <div>{clinic.address}</div>}
@@ -62,9 +83,7 @@ export function PublicLayout() {
             <Link to="/privacidade">Política de privacidade</Link>
             <Link to="/admin">Área da clínica</Link>
           </div>
-          <div style={{ fontSize: '0.82rem', opacity: 0.8 }}>
-            Seus dados são protegidos conforme a LGPD. Conexão segura.
-          </div>
+          <div style={{ fontSize: '0.82rem', opacity: 0.85 }}>Seus dados são protegidos conforme a LGPD. Conexão segura.</div>
         </div>
       </footer>
     </div>

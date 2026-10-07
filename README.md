@@ -27,11 +27,26 @@ Sistema web de agendamento de consultas e exames: o paciente agenda pelo celular
 | Item | Conteúdo no sistema |
 |---|---|
 | Nome | **Centro Clínico JR Saúde** (fachada), "JR Saúde" como nome curto |
-| Identidade visual | Brasão com monograma **JR**, estetoscópio e linha de batimento cardíaco (redesenhado em vetor). Paleta azul-marinho, dourado champanhe e creme. Tipografia serifada. Também: ripas de mármore, linhas de LED douradas e as placas das portas, que viraram os botões de serviço do site. |
+| Identidade visual | Brasão com monograma **JR**, estetoscópio e linha de batimento cardíaco (redesenhado em vetor). **Fotos reais da clínica** tiradas do vídeo (recepção, consultório com o logo iluminado, coleta), com balanço de branco corrigido. |
 | Frases | "Profissionais preparados para cuidar da sua saúde com atenção e qualidade." · "Um ambiente preparado para cuidar de você e da sua família." · "Será um prazer receber você." |
 | Consultas | Pediatria, Dermatologia, Ortopedia, Ginecologia, Cardiologia |
 | Atendimentos | Endocrinologia, Nutrologia, Gastroenterologia, Fisioterapia |
 | Exames | Eletrocardiograma (ECG), MAPA 24h, Holter 24h, Ultrassonografia, Coleta de exames laboratoriais |
+
+### Design (inspirado na referência enviada)
+
+- **Fontes:** *Archivo* (títulos largos e firmes, em caixa alta nos destaques) + *Plus Jakarta Sans* (textos e interface). São equivalentes livres da geométrica usada na referência e ficam embutidas no site, sem depender do Google Fonts.
+- **Cores** (extraídas da imagem de referência):
+
+| Uso | Cor |
+|---|---|
+| Azul profundo (botões, títulos) | `#054688` / `#0A3A6E` |
+| Verde-limão (setas, selos, confirmação) | `#6AFA8A` |
+| Céu claro (fundos) | `#D4E6F1` → `#F1F6FC` |
+| Cartão azul (destaque) | `#3D7FBD` → `#2A66A3` |
+| Texto | `#0A2547` / `#3F5574` |
+
+- **Elementos da referência adaptados:** cabeçalho em pílula de vidro, palavra gigante "JR SAÚDE" ao fundo, título em 3 linhas com ícone de vidro, foto em arco com selos flutuantes, cartões de categoria com seta verde (com ilustrações próprias de vidro no lugar dos órgãos 3D), seção "Sobre nós" com painel de vidro sobre a foto e faixa de números. Os números exibidos são **reais** (quantidade de especialidades e exames cadastrados) — nada de estatísticas inventadas.
 
 **O vídeo não traz** endereço, telefone, WhatsApp, horário de funcionamento nem nomes dos profissionais. O telefone que aparece na fachada é da loja vizinha, então não foi usado. Preencha esses dados no painel (veja o [checklist](#7-checklist-antes-de-abrir-para-os-pacientes)).
 

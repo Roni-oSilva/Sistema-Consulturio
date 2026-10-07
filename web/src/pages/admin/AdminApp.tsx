@@ -129,7 +129,7 @@ function Shell() {
   const sidebar = (extra = '') => (
     <aside className={`sidebar ${extra}`} aria-label="Menu do painel">
       <NavLink to="/admin" className="sidebar-brand">
-        <LogoMark size={34} color="var(--cream-0)" accent="var(--gold-400)" />
+        <LogoMark size={34} color="var(--white)" accent="var(--lime-400)" />
         <div>
           <span className="wordmark wordmark-sm">JR SAÚDE</span>
           <small>Painel da clínica</small>
@@ -177,7 +177,7 @@ function Shell() {
               <Icon name="menu" />
             </button>
             <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <LogoMark size={22} color="var(--cream-0)" accent="var(--gold-400)" />
+              <LogoMark size={22} color="var(--white)" accent="var(--lime-400)" />
               <span className="wordmark wordmark-sm">JR SAÚDE</span>
             </span>
             <button className="btn btn-ghost btn-icon btn-sm" aria-label="Sair" onClick={logout}>
@@ -280,7 +280,7 @@ function Login({ notice, onLogin }: { notice: string | null; onLogin: (u: Me, cs
     <div className="admin login-wrap">
       <form className="login-card" onSubmit={submit}>
         <div className="brand-block">
-          <LogoMark size={64} color="var(--navy-800)" accent="var(--gold-600)" />
+          <LogoMark size={64} color="var(--blue-700)" accent="var(--lime-500)" />
           <span className="wordmark">JR SAÚDE</span>
           <h1>Painel da clínica</h1>
         </div>
@@ -347,7 +347,7 @@ export function ChangePasswordForm({ forced, onDone, onLogout }: { forced?: bool
     <form className="form-stack" onSubmit={submit}>
       {forced && (
         <div className="brand-block">
-          <LogoMark size={48} color="var(--navy-800)" accent="var(--gold-600)" />
+          <LogoMark size={48} color="var(--blue-700)" accent="var(--lime-500)" />
           <h1>Crie sua senha</h1>
           <p className="muted" style={{ margin: 0 }}>
             Por segurança, troque a senha temporária antes de continuar.

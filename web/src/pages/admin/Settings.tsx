@@ -98,7 +98,7 @@ export function SettingsPage() {
                 {s.logo_url ? (
                   <img src={String(s.logo_url)} alt="Logo atual" style={{ height: 64, width: 'auto' }} />
                 ) : (
-                  <LogoMark size={52} color="var(--navy-800)" accent="var(--gold-600)" />
+                  <LogoMark size={52} color="var(--blue-700)" accent="var(--lime-500)" />
                 )}
                 <label className="btn btn-outline btn-sm">
                   <Icon name="upload" size={16} /> {s.logo_url ? 'Trocar logo' : 'Enviar logo próprio'}

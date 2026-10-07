@@ -2,7 +2,7 @@
  * Marca JR Saúde: brasão com monograma "JR", estetoscópio e linha de
  * batimento cardíaco — redesenhado em vetor a partir da fachada e da recepção.
  */
-export function LogoMark({ size = 56, color = 'currentColor', accent = 'var(--gold-500)', title }: { size?: number; color?: string; accent?: string; title?: string }) {
+export function LogoMark({ size = 56, color = 'currentColor', accent = 'var(--lime-500)', title }: { size?: number; color?: string; accent?: string; title?: string }) {
   return (
     <svg
       width={size}

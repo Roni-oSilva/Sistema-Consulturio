@@ -135,7 +135,7 @@ export function Manage() {
 
       {a.canConfirm && (
         <button
-          className="btn btn-gold btn-lg btn-block"
+          className="btn btn-accent btn-lg btn-block"
           disabled={busy}
           onClick={() => act(() => api.post(`/api/appointments/${a.id}/confirm`, {}, { token }), 'Presença confirmada. Obrigado!')}
         >

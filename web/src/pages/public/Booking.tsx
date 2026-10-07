@@ -208,17 +208,17 @@ export function Booking() {
             const list = (services.data ?? []).filter((s) => s.category === cat && s.professionalCount > 0);
             if (!list.length) return null;
             return (
-              <div className="plaque-group" key={cat}>
+              <div className="svc-group" key={cat}>
                 <h3>{CATEGORY_LABEL[cat]}</h3>
-                <ul className="plaques" style={{ gridTemplateColumns: '1fr' }}>
+                <ul className="svc-list" style={{ gridTemplateColumns: '1fr' }}>
                   {list.map((s) => (
                     <li key={s.id}>
-                      <button type="button" className="plaque" onClick={() => go({ servico: s.id, profissional: null, data: null, hora: null, etapa: null })}>
-                        <span className="plaque-name">{s.name}</span>
-                        <span className="plaque-go">
+                      <button type="button" className="svc" onClick={() => go({ servico: s.id, profissional: null, data: null, hora: null, etapa: null })}>
+                        <span className="svc-name">{s.name}</span>
+                        <span className="svc-go">
                           <Icon name="chevronRight" size={22} />
                         </span>
-                        <span className="plaque-desc">
+                        <span className="svc-desc">
                           {s.description}
                           {s.priceCents != null && ` · ${money(s.priceCents)}`}
                         </span>
@@ -527,7 +527,7 @@ export function Booking() {
             <div className="sticky-actions">
               <button
                 type="button"
-                className="btn btn-gold btn-lg btn-block"
+                className="btn btn-accent btn-lg btn-block"
                 onClick={confirm}
                 disabled={submitting || (!!clinic.turnstileSiteKey && !turnstileToken)}
                 aria-busy={submitting}
