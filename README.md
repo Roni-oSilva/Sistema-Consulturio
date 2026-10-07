@@ -5,6 +5,8 @@ Sistema web de agendamento de consultas e exames: o paciente agenda pelo celular
 > **Foco:** agendamento. Não é prontuário médico.
 > **Prioridades:** segurança, simplicidade, confiabilidade e velocidade.
 
+📊 **Apresentação do sistema** (com telas reais): [`docs/Apresentacao-Sistema-JR-Saude.pdf`](docs/Apresentacao-Sistema-JR-Saude.pdf) · 📘 **Guia para colocar no ar:** [`docs/Guia-Colocar-Online-JR-Saude.pdf`](docs/Guia-Colocar-Online-JR-Saude.pdf)
+
 ---
 
 ## Sumário
