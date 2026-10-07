@@ -3,7 +3,7 @@
 # Restaura um backup no banco. ATENÇÃO: substitui os dados atuais.
 # Uso (com docker compose):
 #   docker compose stop app
-#   docker compose run --rm -e CONFIRM=SIM backup /scripts/restore.sh /backups/daily/clinica-AAAAMMDD-HHMMSS.dump
+#   docker compose run --rm --entrypoint /scripts/restore.sh -e CONFIRM=SIM backup /backups/daily/clinica-AAAAMMDD-HHMMSS.dump
 #   docker compose start app
 # Antes de restaurar, um backup de segurança do estado atual é criado.
 # =====================================================================

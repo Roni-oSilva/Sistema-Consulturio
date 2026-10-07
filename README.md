@@ -164,6 +164,8 @@ Depois de configurar, use *Mensagens → Automação → Testar envio*.
 
 ## 6. Colocar no ar (produção)
 
+> 📘 **Guia completo, passo a passo e para quem não é técnico:** [`docs/Guia-Colocar-Online-JR-Saude.pdf`](docs/Guia-Colocar-Online-JR-Saude.pdf). Ele cobre domínio, servidor, DNS, Docker, `.env`, primeiro acesso, WhatsApp, e-mail, backup, manutenção e problemas comuns.
+
 Requisitos: um servidor (VPS) com **Docker** e um **domínio** apontando para ele (ex.: `agendamento.jrsaude.com.br`).
 
 ```bash
@@ -212,7 +214,7 @@ Para atualizar: `git pull && docker compose up -d --build`. As migrações do ba
 - **Restaurar** (cria antes um backup de segurança do estado atual):
   ```bash
   docker compose stop app
-  docker compose run --rm -e CONFIRM=SIM backup /scripts/restore.sh /backups/daily/clinica-AAAAMMDD-HHMMSS.dump
+  docker compose run --rm --entrypoint /scripts/restore.sh -e CONFIRM=SIM backup /backups/daily/clinica-AAAAMMDD-HHMMSS.dump
   docker compose start app
   ```
 - **Fora do servidor (recomendado):** copie `./backups` diariamente para outro local, como Google Drive ou S3 via `rclone`, ou um storage com retenção/imutabilidade. Backup no mesmo disco não protege contra perda do servidor.
