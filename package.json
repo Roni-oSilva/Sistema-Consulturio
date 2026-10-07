@@ -1,0 +1,17 @@
+{
+  "name": "jr-saude-agendamento",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Sistema de agendamento online da Clínica JR Saúde",
+  "workspaces": ["server", "web"],
+  "scripts": {
+    "dev": "npm run dev --workspace server & npm run dev --workspace web",
+    "build": "npm run build --workspace web && npm run build --workspace server",
+    "start": "npm run start --workspace server",
+    "migrate": "npm run migrate --workspace server",
+    "seed": "npm run seed --workspace server",
+    "test": "npm run test --workspace server",
+    "typecheck": "npm run typecheck --workspace server && npm run typecheck --workspace web"
+  },
+  "engines": { "node": ">=20" }
+}
