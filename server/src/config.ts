@@ -25,6 +25,7 @@ const schema = z.object({
   UPLOAD_DIR: z.string().default('./uploads'),
   WEB_DIST_DIR: z.string().default(''),
   DISABLE_JOBS: bool,
+  JOBS_INTERVAL_MS: z.coerce.number().int().min(1000).default(30_000),
   DISABLE_RATE_LIMIT: bool,
   LOG_LEVEL: z.string().default('info'),
 

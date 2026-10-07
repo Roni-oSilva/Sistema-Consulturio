@@ -9,6 +9,7 @@ import { enqueue } from '../services/notifications/queue.js';
 import { processDueNotifications, stillRelevant, type NotificationRow } from '../services/notifications/worker.js';
 import { getSettings } from '../services/settings.js';
 import { normalizePhone } from '../lib/validation.js';
+import { config } from '../config.js';
 
 /**
  * Automação em segundo plano (roda dentro do servidor):
@@ -137,7 +138,7 @@ export function startScheduler(log: FastifyBaseLogger) {
       running = false;
     }
   };
-  const handle = setInterval(tick, 30_000);
-  setTimeout(tick, 3_000);
+  const handle = setInterval(tick, config().JOBS_INTERVAL_MS);
+  setTimeout(tick, Math.min(3_000, config().JOBS_INTERVAL_MS));
   return () => clearInterval(handle);
 }
